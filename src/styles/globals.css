@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif !important;
+  }
+}
+
+/* Only keeping essential button styles */
+.button {
+  --purple: rgb(123, 31, 162);
+  --violet: rgb(103, 58, 183);
+  --pink: rgb(244, 143, 177);
+} 

@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDV5HH28CrTr2uCWbIT08fhPxHHzg0ard8",
-  authDomain: "signup-api-f104b.firebaseapp.com",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: "https://signup-api-f104b-default-rtdb.firebaseio.com",
-  projectId: "signup-api-f104b",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: "signup-api-f104b.firebasestorage.app",
   messagingSenderId: "665757733610",
-  appId: "1:665757733610:web:d86ce29ddf927f35283d93"
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 // Initialize Firebase only once

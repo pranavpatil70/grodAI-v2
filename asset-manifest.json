@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/grodAI-v2/static/css/main.d5902a47.css",
+    "main.js": "/grodAI-v2/static/js/main.c5937b4a.js",
+    "static/js/156.4d80e049.chunk.js": "/grodAI-v2/static/js/156.4d80e049.chunk.js",
+    "index.html": "/grodAI-v2/index.html",
+    "main.d5902a47.css.map": "/grodAI-v2/static/css/main.d5902a47.css.map",
+    "main.c5937b4a.js.map": "/grodAI-v2/static/js/main.c5937b4a.js.map",
+    "156.4d80e049.chunk.js.map": "/grodAI-v2/static/js/156.4d80e049.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5902a47.css",
+    "static/js/main.c5937b4a.js"
+  ]
+}

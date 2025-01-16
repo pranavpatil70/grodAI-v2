@@ -3,8 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  Home, Calendar, BarChart2, Inbox, 
-  Plus, Mic, FileText, Youtube, 
+  Home, Mic, Plus, FileText, Youtube, 
   Lightbulb, LogOut, ChevronDown,
   FolderPlus
 } from 'lucide-react';

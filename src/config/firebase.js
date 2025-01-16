@@ -9,6 +9,14 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
+let app;
+try {
+  app = initializeApp(firebaseConfig);
+} catch (error) {
+  if (!/already exists/.test(error.message)) {
+    console.error('Firebase initialization error', error.stack);
+  }
+}
+
 export const auth = getAuth(app);
 export const db = getFirestore(app); 

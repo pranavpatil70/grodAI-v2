@@ -1,25 +1,37 @@
-import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../components/config/firebase';
+import { db } from '../config/firebase';
+import { 
+  collection, 
+  addDoc, 
+  getDocs, 
+  query, 
+  where, 
+  deleteDoc,
+  doc 
+} from 'firebase/firestore';
 
 export const projectService = {
   // Create a new project
-  async createProject(userId, projectData) {
+  createProject: async (userId, projectData) => {
     try {
-      const docRef = await addDoc(collection(db, 'projects'), {
-        userId,
+      const projectsRef = collection(db, 'projects');
+      const newProject = {
         ...projectData,
+        userId,
         createdAt: new Date().toISOString()
-      });
-      return docRef.id;
+      };
+      const docRef = await addDoc(projectsRef, newProject);
+      return { id: docRef.id, ...newProject };
     } catch (error) {
-      throw new Error('Error creating project: ' + error.message);
+      console.error('Error creating project:', error);
+      throw error;
     }
   },
 
-  // Get user's projects
-  async getUserProjects(userId) {
+  // Get all projects for a user
+  getUserProjects: async (userId) => {
     try {
-      const q = query(collection(db, 'projects'), where('userId', '==', userId));
+      const projectsRef = collection(db, 'projects');
+      const q = query(projectsRef, where("userId", "==", userId));
       const querySnapshot = await getDocs(q);
       
       return querySnapshot.docs.map(doc => ({
@@ -27,7 +39,18 @@ export const projectService = {
         ...doc.data()
       }));
     } catch (error) {
-      throw new Error('Error fetching projects: ' + error.message);
+      console.error('Error fetching projects:', error);
+      throw error;
+    }
+  },
+
+  // Delete a project
+  deleteProject: async (projectId) => {
+    try {
+      await deleteDoc(doc(db, 'projects', projectId));
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      throw error;
     }
   }
 }; 

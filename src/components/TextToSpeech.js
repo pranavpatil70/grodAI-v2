@@ -5,7 +5,7 @@ import {
   Volume2, Languages, Settings,
   Loader, Save
 } from 'lucide-react';
-import { polly } from '../lib/aws-config';
+import { Polly } from '../config/aws-config';
 
 const TextToSpeech = () => {
   const [text, setText] = useState('');
@@ -45,7 +45,7 @@ const TextToSpeech = () => {
         SampleRate: '22050'
       };
 
-      const response = await polly.synthesizeSpeech(params).promise();
+      const response = await Polly.synthesizeSpeech(params).promise();
       const uInt8Array = new Uint8Array(response.AudioStream);
       const blob = new Blob([uInt8Array.buffer], { type: 'audio/mp3' });
       const url = URL.createObjectURL(blob);
@@ -87,7 +87,7 @@ const TextToSpeech = () => {
         Engine: 'neural'
       };
 
-      const response = await polly.synthesizeSpeech(params).promise();
+      const response = await Polly.synthesizeSpeech(params).promise();
       const uInt8Array = new Uint8Array(response.AudioStream);
       const blob = new Blob([uInt8Array.buffer], { type: 'audio/mp3' });
       const url = URL.createObjectURL(blob);

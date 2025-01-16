@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ master ]
+  # Add workflow_dispatch to enable manual triggers
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # Add environment check
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Build
+        env:
+          # Add fallback values for local development
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY || 'local-dev-key' }}
+          REACT_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.REACT_APP_FIREBASE_AUTH_DOMAIN || 'local-dev-domain' }}
+          REACT_APP_FIREBASE_PROJECT_ID: ${{ secrets.REACT_APP_FIREBASE_PROJECT_ID || 'local-dev-project' }}
+          REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID || 'local-dev-app-id' }}
+          REACT_APP_CPANEL_UPLOAD_URL: ${{ secrets.REACT_APP_CPANEL_UPLOAD_URL || 'http://localhost:3000' }}
+          REACT_APP_CPANEL_API_KEY: ${{ secrets.REACT_APP_CPANEL_API_KEY || 'local-dev-api-key' }}
+          CI: false  # Prevents treating warnings as errors
+        run: npm run build
+        
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build 

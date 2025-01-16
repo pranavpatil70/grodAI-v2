@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, Wand2, ChevronDown } from 'lucide-react';
 import { HeroButton } from './HeroButton';
+import Features from './FeaturesSection'; // Adjust the path as necessary
+import Footer from './Footer';
+import RequestFeatures from './RequestFeature';
 
 // Import custom fonts in your _app.js or similar:
 // import '@fontsource/space-grotesk';
@@ -207,6 +210,14 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </div>
+            {/* Integrate Features Section */}
+            <Features />
+
+{/* Integrate Request Features Section */}
+<RequestFeatures />
+
+{/* Integrate Footer Section */}
+<Footer />
     </div>
   );
 };

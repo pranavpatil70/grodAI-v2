@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../config/contexts/AuthContext';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

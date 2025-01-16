@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../config/contexts/AuthContext';
 import { motion } from 'framer-motion';
 import { Save, Play, Download, Loader } from 'lucide-react';
 import { projectService } from '../services/projectService';
-import { cpanelStorage } from '../services/cpanelStorage';
 
 const TextToSpeech = () => {
   const { user } = useAuth();
@@ -43,15 +42,12 @@ const TextToSpeech = () => {
       const blob = await response.blob();
       const file = new File([blob], `tts-${Date.now()}.mp3`, { type: 'audio/mpeg' });
 
-      // Upload to cPanel storage
-      const fileUrl = await cpanelStorage.uploadFile(file);
-
       // Save project details to Firebase
       await projectService.createProject(user.uid, {
         type: 'text-to-speech',
         title: text.substring(0, 50) + '...',
         content: text,
-        audioUrl: fileUrl,
+        audioUrl: audioUrl,
         createdAt: new Date()
       });
 
